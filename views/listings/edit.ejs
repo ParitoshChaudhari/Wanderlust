@@ -1,0 +1,67 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <div class="row">
+    <div class="col-8 offset-2">
+      <h3>Edit a listing</h3>
+      <form action="/listings/<%= data._id %>?_method=PUT" method="POST">
+        <div class="mb-3 mt-4">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            name="listing[title]"
+            value="<%= data.title %>"
+            class="form-control"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea name="listing[description]" class="form-control">
+            <%= data.description %></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Image Link</label>
+          <input
+            type="text"
+            name="listing[image]"
+            value="<%= data.image %>"
+            class="form-control"
+          />
+        </div>
+
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input
+              type="number"
+              name="listing[price]"
+              value="<%= data.price %>"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input
+              type="text"
+              name="listing[country]"
+              value="<%= data.country %>"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            name="listing[location]"
+            value="<%= data.location %>"
+            class="form-control"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-dark mb-3 add-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+</body>
