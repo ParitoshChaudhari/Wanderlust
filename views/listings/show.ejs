@@ -11,7 +11,7 @@
         <p class="card-text">
           <%= data.description %>
           <br />
-          Price :- &#8377; <%= data.price.toLocaleString("en-in") %>
+          Price :- &#8377; <%= (data.price || 0).toLocaleString("en-in") %>
           <br />
           <%= data.location %>
           <br />

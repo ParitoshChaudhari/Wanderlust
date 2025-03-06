@@ -14,7 +14,7 @@
           <div class="card-body">
             <b><h5 class="card-title"><%= data.title %></h5></b>
             <p class="card-text">
-              &#8377;<%= data.price.toLocaleString("en-in") %>/night
+              &#8377; <%= (data.price || 0).toLocaleString("en-in") %> / night
             </p>
           </div>
         </div>
