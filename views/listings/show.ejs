@@ -4,7 +4,7 @@
     <div class="col-8 offset-3">
       <h3 class="mt-3 ">Listing Details:</h3>
     </div>
-    <div class="card mt-3 col-6 offset-3 show-card">
+    <div class="card mt-3 col-6 offset-3 show-card listing-card">
       <img src="<%= data.image %>" class="card-img-top show-img" alt="..." />
       <div class="card-body">
         <b><h5 class="card-title"><%= data.title %></h5></b>
@@ -31,6 +31,46 @@
       <form method="POST" action="/listings/<%= data._id %>?_method=DELETE">
         <button class="btn btn-dark offset-5">delete</button>
       </form>
+    </div>
+
+    <!-- Review Form -->
+    <div class="col-8 offset-3 mt-3 mb-3">
+      <hr>
+      <h4>Leave a Review</h4>
+      <form action="/listings/<%= data._id %>/reviews"  method="post" novalidate class="needs-validation">
+        <div class="mt-3 mb-3">
+          <label for="rating" class="form-label">Rating</label>
+          <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+        </div>
+        <div class="mt-3 mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <textarea name="review[comment]" id="comment" cols="20" rows="4" class="form-control" required></textarea>
+          <div class="valid-feedback">Review Looks good!</div>
+          <div class="invalid-feedback">Add Review Comment</div>
+        </div>
+        <button class="btn btn-outline-dark mt-3 mb-3">submit</button>
+      </form>
+      <hr>
+    </div>
+  </div>
+
+  <!-- All review Design -->
+  <div class="offset-3">     
+    <p><b>All Reviews</b></p>
+    <div class="row">
+     <% for(reviews of data.reviews){ %>
+       <div class="card col-5 ms-2 mb-3"  >
+        <div class="card-body">
+          <h5 class="card-title mt-2">Joe Tit</h5>
+          <p class="card-text"> <%= reviews.comment %></p>
+          <p class="card-text"><%= reviews.rating %> stars</p>
+        </div>
+
+        <form action="/listings/<%= data._id %>/reviews/<%= reviews._id %>?_method=DELETE" method="post" class="mb-3 mt-3">
+          <button class="btn btn-sm btn-dark">Delete</button>
+        </form>
+      </div>
+      <% } %>
     </div>
   </div>
 </body>
