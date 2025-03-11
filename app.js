@@ -7,10 +7,14 @@ const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError.js');
-const listing = require('./routes/listing.js');
-const review = require('./routes/review.js');
+const listingRouter = require('./routes/listing.js');
+const reviewRouter = require('./routes/review.js');
+const userRouter = require('./routes/user.js');
 const flash = require('connect-flash');
-const session = require('express-session')
+const session = require('express-session');
+const User = require('./model/user.js');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
 
 
 dotenv.config();
@@ -38,6 +42,12 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.get("/",(req,res)=>{
     res.redirect('/listings'); 
@@ -67,9 +77,22 @@ app.use((req,res,next)=>{
     next();
 })
 
+
+app.get("/demo",async(req,res)=>{
+    let fakeUser = new User({
+        email:"student@rcpit.ac.in",
+        username:"chaudhaarii",
+    })
+
+    let registerUser = await User.register(fakeUser,"helloworldPassword");
+    console.log(registerUser);
+    res.send(registerUser);
+})
+
 // routes
-app.use("/listings",listing);
-app.use("/listings/:id/reviews",review);
+app.use("/listings",listingRouter);
+app.use("/listings/:id/reviews",reviewRouter);
+app.use("/",userRouter);
 
 
 
