@@ -55,39 +55,13 @@ app.get("/",(req,res)=>{
 
 
 
-
-// app.get('/testListing',async(req,res)=>{
-//     let listingNew = new Listing({
-//         title:"rcpit ch mounatins",
-//         description:"nothing good",
-//         price:9000,
-//         location:"Mumbai",
-//         country:"India"
-//     })
-
-//     await listingNew.save();
-//     console.log(listingNew)
-//     res.send("data save")
-// })
-
-
 app.use((req,res,next)=>{
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    res.locals.currentUser = req.user;
     next();
 })
 
-
-app.get("/demo",async(req,res)=>{
-    let fakeUser = new User({
-        email:"student@rcpit.ac.in",
-        username:"chaudhaarii",
-    })
-
-    let registerUser = await User.register(fakeUser,"helloworldPassword");
-    console.log(registerUser);
-    res.send(registerUser);
-})
 
 // routes
 app.use("/listings",listingRouter);
