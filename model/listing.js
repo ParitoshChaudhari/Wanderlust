@@ -10,12 +10,8 @@ const listingSchema = new Schema({
   },
   description: String,
   image: {
-    type: String,
-    default:"https://media.istockphoto.com/id/1267262825/photo/summer-hike.jpg?s=1024x1024&w=is&k=20&c=qeepa7yAtTQBPueJqKyn6sdOfbLI-hDv7A88C8WYQKo=",
-    set: (v) =>
-      v === ""
-        ? "https://media.istockphoto.com/id/1267262825/photo/summer-hike.jpg?s=1024x1024&w=is&k=20&c=qeepa7yAtTQBPueJqKyn6sdOfbLI-hDv7A88C8WYQKo="
-        : v,
+    url:String,
+    filename:String,
   },
   price: Number,
   location: String,
