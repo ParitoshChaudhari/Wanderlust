@@ -38,6 +38,14 @@
     </div>
     <% } %>
 
+
+    <!-- Map Location -->
+    <div class="col-8 offset-3 mt-3 mb-3">
+      <h3>Where you'll be</h3>
+      <div id="map" class="map" style="height: 300px;" data-lat="<%= data.latitude %>" data-lng="<%= data.longitude %>"
+        data-title="<%= data.title %>" data-location="<%= data.location %>"></div>
+    </div>
+
     <!-- Review Form -->
     <div class="col-8 offset-3 mt-3 mb-3">
       <hr>

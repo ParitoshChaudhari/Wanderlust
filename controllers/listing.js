@@ -15,6 +15,8 @@ module.exports.addNewListing = async(req,res)=>{
     let listing = new Listing(req.body.listing);
     listing.image = { url: req.file.path, filename: req.file.filename }; 
     listing.owner = req.user._id;
+    listing.latitude = parseFloat(listing.latitude);
+    listing.longitude = parseFloat(listing.longitude);
     await listing.save();
     req.flash("success","New Listing Created!");
     res.redirect('/listings');  
@@ -44,7 +46,7 @@ module.exports.renderUpdateForm = async(req,res)=>{
         res.redirect("/listings");
     }
     let originalImageUrl = data.image.url;
-    originalImageUrl = originalImageUrl.replace("/upload","/upload/h_100,w_100/")
+    originalImageUrl = originalImageUrl.replace("/upload","/upload/h_100,w_100")
     res.render("listings/edit.ejs",{data,originalImageUrl});
 };
 
