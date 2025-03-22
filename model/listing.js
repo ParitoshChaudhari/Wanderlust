@@ -18,6 +18,10 @@ const listingSchema = new Schema({
   country: String,
   latitude: Number,  
   longitude: Number,
+  category:{
+    type:String,
+    enum:["Trending","Rooms","Beach","Mountains","Castle","Arctic","Pools","Boats","Container","Tower"],
+  },
   reviews:[{
     type:Schema.Types.ObjectId,
     ref:"Review",

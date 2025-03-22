@@ -98,3 +98,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('longitude').value = e.latlng.lng;
   });
 });
+
+// tax
+let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+
+taxSwitch.addEventListener("click", () => {
+  let tax = document.getElementsByClassName("tax_info");
+  for (info of tax) {
+    if (info.style.display != "inline") {
+      info.style.display = "inline";
+    } else {
+      info.style.display = "none";
+    }
+  }
+});
