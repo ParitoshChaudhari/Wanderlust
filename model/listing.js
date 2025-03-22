@@ -20,7 +20,7 @@ const listingSchema = new Schema({
   longitude: Number,
   category:{
     type:String,
-    enum:["Trending","Rooms","Beach","Mountains","Castle","Arctic","Pools","Boats","Container","Tower"],
+    enum:["Trending","Rooms","Beach","Mountains","Castle","Arctic","Pools","Boats","Container","Tower","others"],
   },
   reviews:[{
     type:Schema.Types.ObjectId,

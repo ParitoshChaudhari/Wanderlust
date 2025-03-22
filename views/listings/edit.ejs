@@ -44,6 +44,19 @@
           />
         </div>
 
+        <div class="mb-3">
+          <label for="listing[category]" class="form-label">Category</label>
+          <select class="form-select" name="listing[category]">
+            <% let categories = ["Trending", "Rooms", "Beach", "Mountains", "Castle", "Arctic", "Pools", "Boats", "Container", "Tower", "others"]; %>
+            
+            <% categories.forEach(function(category) { %>
+              <option value="<%= category %>" <%= data.category === category ? 'selected' : '' %> >
+                <%= category %>
+              </option>
+            <% }); %>
+          </select>
+        </div>
+      
         <div class="row">
           <div class="mb-3 col-md-4">
             <label for="price" class="form-label">Price</label>
