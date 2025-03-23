@@ -12,6 +12,7 @@ const reviewRouter = require('./routes/review.js');
 const userRouter = require('./routes/user.js');
 const flash = require('connect-flash');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const User = require('./model/user.js');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -28,8 +29,22 @@ app.use(express.static(path.join(__dirname,"public")));
 dbConnect();
 
 
+
+const store = MongoStore.create({
+    mongoUrl:process.env.MONGO_URI,
+    crypto:{
+        secret:process.env.STORE_SECRET,
+    },
+    touchAfter:24*3600,
+})
+
+store.on("error",()=>{
+    console.log("Error in MongoDB Session store",err)
+})
+
 const sessionOptions = {
-    secret:"mysecret",
+    store,
+    secret:process.env.STORE_SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{

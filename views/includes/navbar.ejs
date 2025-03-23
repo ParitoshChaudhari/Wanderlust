@@ -20,8 +20,8 @@
       </div>
       <!-- Search Bar -->
       <div class="navbar-nav ms-auto">
-        <form class="d-flex search-form " role="search">
-          <input class="form-control me-2 rounded-pill" type="search" placeholder="Search...." aria-label="Search" style="padding: 0 2rem 0 2rem;"> 
+        <form class="d-flex search-form " role="search" method="GET" action="/listings">
+          <input class="form-control me-2 rounded-pill" type="search" placeholder="Search...." aria-label="Search" name="query"  style="padding: 0 2rem 0 2rem;"> 
           <button class="btn btn-outline-danger d-flex justify-content-around align-items-center rounded-pill" type="submit"><i class="fa-solid fa-magnifying-glass p-1"></i>Search</button>
         </form>
       </div>
