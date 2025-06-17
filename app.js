@@ -16,6 +16,8 @@ const MongoStore = require('connect-mongo');
 const User = require('./model/user.js');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const { rateLimit } = require('express-rate-limit');
+
 
 
 dotenv.config();
@@ -68,6 +70,17 @@ app.get("/",(req,res)=>{
     res.redirect('/listings'); 
 })
 
+
+const limiter = rateLimit({
+	windowMs: 1 * 60 * 1000, // 11 minutes
+	limit: 3, // Limit each IP to 3 requests per `window` (here, per 15 minutes).
+	standardHeaders: 'draft-8',
+    message:"Too many requests from this IP, please try again later.",
+	legacyHeaders: false,
+})
+
+// Apply the rate limiting middleware to all requests.
+app.use(limiter)
 
 
 app.use((req,res,next)=>{
